@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - Health Talia Dental CRM</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-logo">
+          <div class="sidebar-logo-icon">🦷</div>
+          <div class="sidebar-logo-text">
+            <span class="sidebar-logo-title">Health Talia</span>
+            <span class="sidebar-logo-subtitle">Dental CRM</span>
+          </div>
+        </a>
+        <button class="sidebar-toggle" onclick="toggleSidebar()"><span>☰</span></button>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <ul class="nav-list">
+            <li class="nav-item"><a href="settings.html" class="nav-link active"><span class="nav-icon">⚙️</span><span class="nav-text">Settings</span></a></li>
+            <li class="nav-item"><a href="admin.html" class="nav-link"><span class="nav-icon">🔐</span><span class="nav-text">Admin</span></a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <div class="main-content">
+      <header class="header">
+        <div class="header-left">
+          <h1 class="header-title">Settings</h1>
+        </div>
+        <div class="header-right">
+          <button class="header-icon-btn" onclick="toggleTheme()"><span id="theme-icon">🌙</span></button>
+        </div>
+      </header>
+
+      <div class="page-container">
+        <div class="tabs">
+          <ul class="tabs-list">
+            <button class="tabs-tab active" onclick="switchTab('clinic-info')">Clinic Information</button>
+            <button class="tabs-tab" onclick="switchTab('treatments-catalog')">Treatments Catalog</button>
+            <button class="tabs-tab" onclick="switchTab('pdf-settings')">PDF Settings</button>
+            <button class="tabs-tab" onclick="switchTab('preferences')">Preferences</button>
+          </ul>
+        </div>
+
+        <div class="tabs-content active" id="clinic-info">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Clinic Information</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label class="form-label">Clinic Logo</label>
+                <div style="display: flex; align-items: center; gap: var(--space-4);">
+                  <div class="avatar avatar-lg">🦷</div>
+                  <button class="btn btn-outline">Upload Logo</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label required">Clinic Name</label>
+                <input type="text" class="form-input" value="Health Talia Dental Clinic">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Address</label>
+                <textarea class="form-textarea">123 Dental Street, London, UK</textarea>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div class="form-group">
+                  <label class="form-label">Phone</label>
+                  <input type="tel" class="form-input" value="+44 20 7123 4567">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-input" value="info@healthtalia.com">
+                </div>
+              </div>
+
+              <button class="btn btn-primary">
+                <span>💾</span><span>Save Changes</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabs-content" id="treatments-catalog">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Treatments & Pricing</h3>
+              <button class="btn btn-primary btn-sm">➕ Add Treatment</button>
+            </div>
+            <div class="card-body" style="padding: 0;">
+              <div class="table-container" style="border: none;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Treatment Name</th>
+                      <th>Duration</th>
+                      <th>Price (GBP)</th>
+                      <th>Price (EUR)</th>
+                      <th>Price (USD)</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Consultation</td>
+                      <td>30 min</td>
+                      <td>£50</td>
+                      <td>€58</td>
+                      <td>$62</td>
+                      <td><button class="btn btn-sm btn-ghost">✏️</button></td>
+                    </tr>
+                    <tr>
+                      <td>Teeth Cleaning</td>
+                      <td>45 min</td>
+                      <td>£120</td>
+                      <td>€140</td>
+                      <td>$150</td>
+                      <td><button class="btn btn-sm btn-ghost">✏️</button></td>
+                    </tr>
+                    <tr>
+                      <td>Teeth Whitening</td>
+                      <td>60 min</td>
+                      <td>£350</td>
+                      <td>€410</td>
+                      <td>$440</td>
+                      <td><button class="btn btn-sm btn-ghost">✏️</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabs-content" id="pdf-settings">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">PDF Export Settings</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label class="form-label">PDF Header Text</label>
+                <input type="text" class="form-input" value="Treatment Plan Quote">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Footer Text</label>
+                <input type="text" class="form-input" value="Thank you for choosing Health Talia">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Show/Hide Sections</label>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="show-logo" checked>
+                  <label class="form-check-label" for="show-logo">Show Clinic Logo</label>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="show-prices" checked>
+                  <label class="form-check-label" for="show-prices">Show Prices</label>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="show-terms" checked>
+                  <label class="form-check-label" for="show-terms">Show Terms & Conditions</label>
+                </div>
+              </div>
+
+              <button class="btn btn-primary">
+                <span>💾</span><span>Save PDF Settings</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabs-content" id="preferences">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">User Preferences</h3>
+            </div>
+            <div class="card-body">
+              <div class="grid grid-cols-2 gap-4">
+                <div class="form-group">
+                  <label class="form-label">Default Language</label>
+                  <select class="form-select">
+                    <option>English</option>
+                    <option>Türkçe</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Default Currency</label>
+                  <select class="form-select">
+                    <option>GBP (£)</option>
+                    <option>EUR (€)</option>
+                    <option>USD ($)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Theme</label>
+                <div class="form-check">
+                  <input type="radio" name="theme" class="form-check-input" checked>
+                  <label class="form-check-label">Light Mode</label>
+                </div>
+                <div class="form-check">
+                  <input type="radio" name="theme" class="form-check-input">
+                  <label class="form-check-label">Dark Mode</label>
+                </div>
+              </div>
+
+              <button class="btn btn-primary">
+                <span>💾</span><span>Save Preferences</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../js/app.js"></script>
+  <script src="../js/translations.js"></script>
+</body>
+</html>

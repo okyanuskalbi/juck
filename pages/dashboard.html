@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Health Talia Dental CRM</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-logo">
+          <div class="sidebar-logo-icon">🦷</div>
+          <div class="sidebar-logo-text">
+            <span class="sidebar-logo-title">Health Talia</span>
+            <span class="sidebar-logo-subtitle">Dental CRM</span>
+          </div>
+        </a>
+        <button class="sidebar-toggle" onclick="toggleSidebar()">
+          <span>☰</span>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <h3 class="nav-section-title">Main</h3>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="dashboard.html" class="nav-link active">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text" data-lang="dashboard">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="patients.html" class="nav-link">
+                <span class="nav-icon">👥</span>
+                <span class="nav-text" data-lang="patients">Patients</span>
+                <span class="nav-badge badge badge-primary">24</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="treatment-planner.html" class="nav-link">
+                <span class="nav-icon">📋</span>
+                <span class="nav-text" data-lang="treatment-planner">Treatment Planner</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="treatment-history.html" class="nav-link">
+                <span class="nav-icon">📜</span>
+                <span class="nav-text" data-lang="treatment-history">Treatment History</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-section-title">Financial</h3>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="payments.html" class="nav-link">
+                <span class="nav-icon">💰</span>
+                <span class="nav-text" data-lang="payments">Payments</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="expenses.html" class="nav-link">
+                <span class="nav-icon">💸</span>
+                <span class="nav-text" data-lang="expenses">Expenses</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="reports.html" class="nav-link">
+                <span class="nav-icon">📈</span>
+                <span class="nav-text" data-lang="reports">Reports</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-section-title">System</h3>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="settings.html" class="nav-link">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-text" data-lang="settings">Settings</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="admin.html" class="nav-link">
+                <span class="nav-icon">🔐</span>
+                <span class="nav-text" data-lang="admin">Admin Panel</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user" onclick="toggleDropdown('user-dropdown')">
+          <div class="avatar">
+            <span>JD</span>
+          </div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Dr. John Doe</div>
+            <div class="sidebar-user-role">Administrator</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-left">
+          <button class="btn btn-icon btn-ghost" onclick="toggleMobileMenu()">
+            <span>☰</span>
+          </button>
+          <h1 class="header-title" data-lang="dashboard">Dashboard</h1>
+        </div>
+
+        <div class="header-right">
+          <div class="header-search">
+            <span class="header-search-icon">🔍</span>
+            <input type="text" placeholder="Search..." data-lang-placeholder="search">
+          </div>
+
+          <div class="header-actions">
+            <div class="dropdown" id="language-dropdown">
+              <button class="header-selector" onclick="toggleDropdown('language-dropdown')">
+                <span>🌐</span>
+                <span id="language-display">EN</span>
+              </button>
+              <div class="dropdown-menu">
+                <button class="dropdown-item" onclick="setLanguage('en')">🇬🇧 English</button>
+                <button class="dropdown-item" onclick="setLanguage('tr')">🇹🇷 Türkçe</button>
+              </div>
+            </div>
+
+            <div class="dropdown" id="currency-dropdown">
+              <button class="header-selector" onclick="toggleDropdown('currency-dropdown')">
+                <span>💱</span>
+                <span id="currency-display">GBP</span>
+              </button>
+              <div class="dropdown-menu">
+                <button class="dropdown-item" onclick="setCurrency('GBP')">£ GBP</button>
+                <button class="dropdown-item" onclick="setCurrency('EUR')">€ EUR</button>
+                <button class="dropdown-item" onclick="setCurrency('USD')">$ USD</button>
+              </div>
+            </div>
+
+            <button class="header-icon-btn" onclick="toggleTheme()">
+              <span id="theme-icon">🌙</span>
+            </button>
+
+            <button class="header-icon-btn">
+              <span>🔔</span>
+              <span class="badge">3</span>
+            </button>
+
+            <button class="header-icon-btn" onclick="logout()">
+              <span>🚪</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="page-container">
+        <div class="page-header">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div>
+              <h2 class="page-title" data-lang="welcome">Welcome back, Dr. John Doe</h2>
+              <p class="page-description">Here's what's happening with your practice today.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-outline">
+                <span>📅</span>
+                <span>Today: Dec 2, 2025</span>
+              </button>
+              <button class="btn btn-primary" onclick="window.location.href='treatment-planner.html'">
+                <span>➕</span>
+                <span data-lang="create-plan">Create Treatment Plan</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-4" style="margin-bottom: var(--space-8);">
+          <div class="kpi-card">
+            <div class="kpi-card-icon primary">
+              <span>💰</span>
+            </div>
+            <div class="kpi-card-label" data-lang="total-revenue">Total Revenue</div>
+            <div class="kpi-card-value">£45,250</div>
+            <div class="kpi-card-change positive">
+              <span>↑</span>
+              <span>+12.5% from last month</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-card-icon danger">
+              <span>💸</span>
+            </div>
+            <div class="kpi-card-label" data-lang="total-expenses">Total Expenses</div>
+            <div class="kpi-card-value">£18,420</div>
+            <div class="kpi-card-change negative">
+              <span>↑</span>
+              <span>+3.2% from last month</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-card-icon success">
+              <span>📈</span>
+            </div>
+            <div class="kpi-card-label" data-lang="net-profit">Net Profit</div>
+            <div class="kpi-card-value">£26,830</div>
+            <div class="kpi-card-change positive">
+              <span>↑</span>
+              <span>+18.7% from last month</span>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-card-icon warning">
+              <span>👥</span>
+            </div>
+            <div class="kpi-card-label" data-lang="active-patients">Active Patients</div>
+            <div class="kpi-card-value">124</div>
+            <div class="kpi-card-change positive">
+              <span>↑</span>
+              <span>+8 new this month</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="grid grid-cols-2">
+          <!-- Recent Activities -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title" data-lang="recent-activities">Recent Activities</h3>
+            </div>
+            <div class="card-body" style="padding: 0;">
+              <div class="table-container" style="border: none;">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div style="display: flex; align-items: center; gap: var(--space-3);">
+                          <div class="avatar avatar-sm" style="background-color: var(--color-success);">
+                            <span>✓</span>
+                          </div>
+                          <div>
+                            <div class="font-medium">Payment Received</div>
+                            <div class="text-sm text-secondary">Sarah Johnson - £450</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="text-right text-secondary text-sm">2 hours ago</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div style="display: flex; align-items: center; gap: var(--space-3);">
+                          <div class="avatar avatar-sm" style="background-color: var(--color-primary);">
+                            <span>📋</span>
+                          </div>
+                          <div>
+                            <div class="font-medium">New Treatment Plan</div>
+                            <div class="text-sm text-secondary">Michael Chen - Root Canal</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="text-right text-secondary text-sm">5 hours ago</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div style="display: flex; align-items: center; gap: var(--space-3);">
+                          <div class="avatar avatar-sm" style="background-color: var(--color-warning);">
+                            <span>👤</span>
+                          </div>
+                          <div>
+                            <div class="font-medium">New Patient Registered</div>
+                            <div class="text-sm text-secondary">Emma Wilson</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="text-right text-secondary text-sm">1 day ago</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div style="display: flex; align-items: center; gap: var(--space-3);">
+                          <div class="avatar avatar-sm" style="background-color: var(--color-danger);">
+                            <span>💸</span>
+                          </div>
+                          <div>
+                            <div class="font-medium">Expense Added</div>
+                            <div class="text-sm text-secondary">Dental Supplies - £1,250</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="text-right text-secondary text-sm">2 days ago</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div style="display: flex; align-items: center; gap: var(--space-3);">
+                          <div class="avatar avatar-sm" style="background-color: var(--color-success);">
+                            <span>✓</span>
+                          </div>
+                          <div>
+                            <div class="font-medium">Treatment Completed</div>
+                            <div class="text-sm text-secondary">David Lee - Teeth Whitening</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="text-right text-secondary text-sm">3 days ago</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card-footer">
+              <a href="#" class="text-sm" style="color: var(--color-primary);">View all activities →</a>
+            </div>
+          </div>
+
+          <!-- Quick Stats -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title" data-lang="quick-stats">Quick Statistics</h3>
+            </div>
+            <div class="card-body">
+              <div style="display: flex; flex-direction: column; gap: var(--space-6);">
+                <!-- Stat 1 -->
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+                    <span class="text-sm text-secondary">Appointments This Week</span>
+                    <span class="font-semibold">32 / 40</span>
+                  </div>
+                  <div style="width: 100%; height: 8px; background-color: var(--color-gray-200); border-radius: var(--radius-full); overflow: hidden;">
+                    <div style="width: 80%; height: 100%; background-color: var(--color-primary);"></div>
+                  </div>
+                </div>
+
+                <!-- Stat 2 -->
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+                    <span class="text-sm text-secondary">Treatment Plans Completed</span>
+                    <span class="font-semibold">18 / 25</span>
+                  </div>
+                  <div style="width: 100%; height: 8px; background-color: var(--color-gray-200); border-radius: var(--radius-full); overflow: hidden;">
+                    <div style="width: 72%; height: 100%; background-color: var(--color-success);"></div>
+                  </div>
+                </div>
+
+                <!-- Stat 3 -->
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+                    <span class="text-sm text-secondary">Outstanding Payments</span>
+                    <span class="font-semibold">£5,420</span>
+                  </div>
+                  <div style="width: 100%; height: 8px; background-color: var(--color-gray-200); border-radius: var(--radius-full); overflow: hidden;">
+                    <div style="width: 35%; height: 100%; background-color: var(--color-warning);"></div>
+                  </div>
+                </div>
+
+                <!-- Stat 4 -->
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+                    <span class="text-sm text-secondary">Patient Satisfaction</span>
+                    <span class="font-semibold">4.8 / 5.0</span>
+                  </div>
+                  <div style="width: 100%; height: 8px; background-color: var(--color-gray-200); border-radius: var(--radius-full); overflow: hidden;">
+                    <div style="width: 96%; height: 100%; background-color: var(--color-success);"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upcoming Appointments -->
+        <div class="card" style="margin-top: var(--space-6);">
+          <div class="card-header">
+            <h3 class="card-title">Upcoming Appointments</h3>
+          </div>
+          <div class="card-body" style="padding: 0;">
+            <div class="table-container" style="border: none;">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Patient</th>
+                    <th>Treatment</th>
+                    <th>Date & Time</th>
+                    <th>Dentist</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: var(--space-3);">
+                        <div class="avatar avatar-sm">SJ</div>
+                        <span class="font-medium">Sarah Johnson</span>
+                      </div>
+                    </td>
+                    <td>Teeth Cleaning</td>
+                    <td>Dec 3, 2025 - 10:00 AM</td>
+                    <td>Dr. John Doe</td>
+                    <td><span class="badge badge-success">Confirmed</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: var(--space-3);">
+                        <div class="avatar avatar-sm">MC</div>
+                        <span class="font-medium">Michael Chen</span>
+                      </div>
+                    </td>
+                    <td>Root Canal</td>
+                    <td>Dec 3, 2025 - 2:00 PM</td>
+                    <td>Dr. John Doe</td>
+                    <td><span class="badge badge-warning">Pending</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div style="display: flex; align-items: center; gap: var(--space-3);">
+                        <div class="avatar avatar-sm">EW</div>
+                        <span class="font-medium">Emma Wilson</span>
+                      </div>
+                    </td>
+                    <td>Consultation</td>
+                    <td>Dec 4, 2025 - 11:30 AM</td>
+                    <td>Dr. Jane Smith</td>
+                    <td><span class="badge badge-success">Confirmed</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script src="../js/translations.js"></script>
+</body>
+</html>

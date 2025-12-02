@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expenses - Health Talia Dental CRM</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-logo">
+          <div class="sidebar-logo-icon">🦷</div>
+          <div class="sidebar-logo-text">
+            <span class="sidebar-logo-title">Health Talia</span>
+            <span class="sidebar-logo-subtitle">Dental CRM</span>
+          </div>
+        </a>
+        <button class="sidebar-toggle" onclick="toggleSidebar()"><span>☰</span></button>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <ul class="nav-list">
+            <li class="nav-item"><a href="payments.html" class="nav-link"><span class="nav-icon">💰</span><span class="nav-text">Payments</span></a></li>
+            <li class="nav-item"><a href="expenses.html" class="nav-link active"><span class="nav-icon">💸</span><span class="nav-text">Expenses</span></a></li>
+            <li class="nav-item"><a href="reports.html" class="nav-link"><span class="nav-icon">📈</span><span class="nav-text">Reports</span></a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <div class="main-content">
+      <header class="header">
+        <div class="header-left">
+          <h1 class="header-title">Expenses Management</h1>
+        </div>
+        <div class="header-right">
+          <button class="btn btn-primary" onclick="openModal('add-expense-modal')">
+            <span>➕</span><span>Add Expense</span>
+          </button>
+          <button class="header-icon-btn" onclick="toggleTheme()"><span id="theme-icon">🌙</span></button>
+        </div>
+      </header>
+
+      <div class="page-container">
+        <div class="grid grid-cols-3" style="margin-bottom: var(--space-6);">
+          <div class="kpi-card">
+            <div class="kpi-card-icon danger">💸</div>
+            <div class="kpi-card-label">Total Expenses</div>
+            <div class="kpi-card-value">£18,420</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-card-icon warning">📅</div>
+            <div class="kpi-card-label">This Month</div>
+            <div class="kpi-card-value">£3,240</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-card-icon success">📊</div>
+            <div class="kpi-card-label">Avg Monthly</div>
+            <div class="kpi-card-value">£2,850</div>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Expense ID</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#EXP001</td>
+                <td><span class="badge badge-primary">Supplies</span></td>
+                <td>Dental Equipment</td>
+                <td>£1,250</td>
+                <td>Dec 1, 2025</td>
+                <td><button class="btn btn-sm btn-ghost">✏️</button></td>
+              </tr>
+              <tr>
+                <td>#EXP002</td>
+                <td><span class="badge badge-warning">Utilities</span></td>
+                <td>Electricity Bill</td>
+                <td>£420</td>
+                <td>Nov 30, 2025</td>
+                <td><button class="btn btn-sm btn-ghost">✏️</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="add-expense-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Add New Expense</h3>
+        <button class="modal-close" onclick="closeModal('add-expense-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label class="form-label required">Category</label>
+            <select class="form-select">
+              <option>Supplies</option>
+              <option>Utilities</option>
+              <option>Salary</option>
+              <option>Rent</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label required">Amount</label>
+            <input type="number" class="form-input" placeholder="0.00">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description</label>
+            <textarea class="form-textarea" placeholder="Enter details"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('add-expense-modal')">Cancel</button>
+        <button class="btn btn-primary">Save Expense</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script src="../js/translations.js"></script>
+</body>
+</html>
