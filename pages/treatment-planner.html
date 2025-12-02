@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="../css/design-system.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/layout.css">
+  <!-- jsPDF for PDF generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
   <style>
     .visit-card {
       background: var(--color-background);
@@ -86,7 +88,7 @@
             </div>
             <div class="page-actions">
               <button class="btn btn-outline"><span>💾</span><span>Save Draft</span></button>
-              <button class="btn btn-primary"><span>📄</span><span>Generate PDF</span></button>
+              <button class="btn btn-primary" onclick="generateTreatmentPDF()"><span>📄</span><span>Generate PDF</span></button>
             </div>
           </div>
         </div>
@@ -117,58 +119,155 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Treatment Visits</h3>
+                <h3 class="card-title">Treatment Phases</h3>
+                <p class="text-sm text-secondary">Multi-phase treatment planning with automatic percentage calculation</p>
               </div>
               <div class="card-body">
-                <div class="grid grid-cols-2 gap-4">
-                  <div class="visit-card">
-                    <h4 style="margin-bottom: var(--space-3); font-weight: 600;">Visit 1</h4>
+                <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+                  <!-- Phase 1 -->
+                  <div class="visit-card" id="phase-1">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-3);">
+                      <h4 style="font-weight: 600; color: var(--color-primary);">Phase 1</h4>
+                      <span class="badge badge-primary" id="phase-1-percentage">0%</span>
+                    </div>
                     <div class="treatment-item">
                       <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
-                          <div class="font-medium">Teeth Cleaning</div>
-                          <div class="text-xs text-secondary">30 minutes</div>
+                          <div class="font-medium">Initial Consultation & Examination</div>
+                          <div class="text-xs text-secondary">Assessment and planning</div>
                         </div>
-                        <div class="font-semibold">£120</div>
+                        <div class="font-semibold">£250</div>
                       </div>
                     </div>
                     <div class="treatment-item">
                       <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
-                          <div class="font-medium">X-Ray</div>
-                          <div class="text-xs text-secondary">15 minutes</div>
+                          <div class="font-medium">X-Rays & Diagnostics</div>
+                          <div class="text-xs text-secondary">Full mouth imaging</div>
                         </div>
-                        <div class="font-semibold">£80</div>
+                        <div class="font-semibold">£450</div>
                       </div>
                     </div>
-                    <div style="margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--color-border);">
+                    <div class="treatment-item">
+                      <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                          <div class="font-medium">Teeth Cleaning & Preparation</div>
+                          <div class="text-xs text-secondary">Deep cleaning session</div>
+                        </div>
+                        <div class="font-semibold">£300</div>
+                      </div>
+                    </div>
+                    <div style="margin-top: var(--space-3); padding-top: var(--space-3); border-top: 2px solid var(--color-border);">
                       <div style="display: flex; justify-content: space-between;">
-                        <span class="font-semibold">Visit Total:</span>
-                        <span class="font-bold" style="color: var(--color-primary);">£200</span>
+                        <span class="font-semibold">Phase 1 Total:</span>
+                        <span class="font-bold text-xl" style="color: var(--color-primary);" id="phase-1-total">£1,000</span>
                       </div>
                     </div>
                   </div>
-                  <div class="visit-card">
-                    <h4 style="margin-bottom: var(--space-3); font-weight: 600;">Visit 2</h4>
+
+                  <!-- Phase 2 -->
+                  <div class="visit-card" id="phase-2">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-3);">
+                      <h4 style="font-weight: 600; color: var(--color-secondary);">Phase 2</h4>
+                      <span class="badge badge-secondary" id="phase-2-percentage">0%</span>
+                    </div>
                     <div class="treatment-item">
                       <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
-                          <div class="font-medium">Root Canal</div>
-                          <div class="text-xs text-secondary">90 minutes</div>
+                          <div class="font-medium">Root Canal Treatment</div>
+                          <div class="text-xs text-secondary">2-3 sessions</div>
                         </div>
-                        <div class="font-semibold">£650</div>
+                        <div class="font-semibold">£1,200</div>
                       </div>
                     </div>
-                    <div style="margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--color-border);">
+                    <div class="treatment-item">
+                      <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                          <div class="font-medium">Crown Installation (x2)</div>
+                          <div class="text-xs text-secondary">Premium porcelain crowns</div>
+                        </div>
+                        <div class="font-semibold">£1,600</div>
+                      </div>
+                    </div>
+                    <div style="margin-top: var(--space-3); padding-top: var(--space-3); border-top: 2px solid var(--color-border);">
                       <div style="display: flex; justify-content: space-between;">
-                        <span class="font-semibold">Visit Total:</span>
-                        <span class="font-bold" style="color: var(--color-primary);">£650</span>
+                        <span class="font-semibold">Phase 2 Total:</span>
+                        <span class="font-bold text-xl" style="color: var(--color-secondary);" id="phase-2-total">£2,800</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Phase 3 -->
+                  <div class="visit-card" id="phase-3">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-3);">
+                      <h4 style="font-weight: 600; color: var(--color-accent);">Phase 3</h4>
+                      <span class="badge badge-success" id="phase-3-percentage">0%</span>
+                    </div>
+                    <div class="treatment-item">
+                      <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                          <div class="font-medium">Teeth Whitening</div>
+                          <div class="text-xs text-secondary">Professional whitening</div>
+                        </div>
+                        <div class="font-semibold">£350</div>
+                      </div>
+                    </div>
+                    <div class="treatment-item">
+                      <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                          <div class="font-medium">Follow-up & Maintenance</div>
+                          <div class="text-xs text-secondary">3 checkup sessions</div>
+                        </div>
+                        <div class="font-semibold">£150</div>
+                      </div>
+                    </div>
+                    <div style="margin-top: var(--space-3); padding-top: var(--space-3); border-top: 2px solid var(--color-border);">
+                      <div style="display: flex; justify-content: space-between;">
+                        <span class="font-semibold">Phase 3 Total:</span>
+                        <span class="font-bold text-xl" style="color: var(--color-accent);" id="phase-3-total">£500</span>
                       </div>
                     </div>
                   </div>
                 </div>
+
+                <!-- Phase Summary Table -->
+                <div style="margin-top: var(--space-6); padding: var(--space-4); background: var(--color-background); border-radius: var(--radius-lg); border: 2px solid var(--color-primary);">
+                  <h4 style="font-weight: 600; margin-bottom: var(--space-4); color: var(--color-primary);">Treatment Plan Summary</h4>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th style="text-align: left;">Phase</th>
+                        <th style="text-align: right;">Value</th>
+                        <th style="text-align: right;">Percentage</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><strong>Phase 1</strong></td>
+                        <td style="text-align: right;" id="summary-phase-1">£1,000</td>
+                        <td style="text-align: right;"><span class="badge badge-primary" id="summary-phase-1-pct">23%</span></td>
+                      </tr>
+                      <tr>
+                        <td><strong>Phase 2</strong></td>
+                        <td style="text-align: right;" id="summary-phase-2">£2,800</td>
+                        <td style="text-align: right;"><span class="badge badge-secondary" id="summary-phase-2-pct">65%</span></td>
+                      </tr>
+                      <tr>
+                        <td><strong>Phase 3</strong></td>
+                        <td style="text-align: right;" id="summary-phase-3">£500</td>
+                        <td style="text-align: right;"><span class="badge badge-success" id="summary-phase-3-pct">12%</span></td>
+                      </tr>
+                      <tr style="border-top: 2px solid var(--color-border); font-weight: bold;">
+                        <td><strong>TOTAL</strong></td>
+                        <td style="text-align: right; color: var(--color-primary);" id="summary-total">£4,300</td>
+                        <td style="text-align: right;"><span class="badge badge-primary">100%</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
                 <button class="btn btn-outline w-full" style="margin-top: var(--space-4);">
-                  <span>➕</span><span>Add Another Visit</span>
+                  <span>➕</span><span>Add Treatment Item</span>
                 </button>
               </div>
             </div>
@@ -201,12 +300,29 @@
                 </div>
               </div>
               <div class="card-footer">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-3);">
-                  <span class="font-semibold">Total Plan Cost:</span>
-                  <span class="text-2xl font-bold" style="color: var(--color-primary);">£850</span>
+                <div style="padding: var(--space-3); background: var(--color-background); border-radius: var(--radius-md); margin-bottom: var(--space-3);">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+                    <span class="text-sm">Phase 1:</span>
+                    <span class="font-semibold" style="color: var(--color-primary);">£1,000</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+                    <span class="text-sm">Phase 2:</span>
+                    <span class="font-semibold" style="color: var(--color-secondary);">£2,800</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2); padding-bottom: var(--space-2); border-bottom: 1px solid var(--color-border);">
+                    <span class="text-sm">Phase 3:</span>
+                    <span class="font-semibold" style="color: var(--color-accent);">£500</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-top: var(--space-2);">
+                    <span class="font-semibold">Total Plan Cost:</span>
+                    <span class="text-2xl font-bold" style="color: var(--color-primary);">£4,300</span>
+                  </div>
                 </div>
-                <button class="btn btn-success w-full">
+                <button class="btn btn-success w-full" style="margin-bottom: var(--space-2);">
                   <span>✓</span><span>Create Plan</span>
+                </button>
+                <button class="btn btn-primary w-full" onclick="generateTreatmentPDF()">
+                  <span>📄</span><span>Generate PDF</span>
                 </button>
               </div>
             </div>
@@ -219,5 +335,48 @@
   <script src="../js/branding.js"></script>
   <script src="../js/app.js"></script>
   <script src="../js/translations.js"></script>
+  <script src="../js/pdf-generator.js"></script>
+  <script>
+    // Treatment Phase Calculator
+    function calculatePhasePercentages() {
+      // Get phase totals
+      const phase1 = 1000; // £1,000
+      const phase2 = 2800; // £2,800
+      const phase3 = 500;  // £500
+      const total = phase1 + phase2 + phase3; // £4,300
+
+      // Calculate percentages
+      const phase1Pct = Math.round((phase1 / total) * 100);
+      const phase2Pct = Math.round((phase2 / total) * 100);
+      const phase3Pct = Math.round((phase3 / total) * 100);
+
+      // Update phase badges
+      document.getElementById('phase-1-percentage').textContent = phase1Pct + '%';
+      document.getElementById('phase-2-percentage').textContent = phase2Pct + '%';
+      document.getElementById('phase-3-percentage').textContent = phase3Pct + '%';
+
+      // Update summary table
+      document.getElementById('summary-phase-1-pct').textContent = phase1Pct + '%';
+      document.getElementById('summary-phase-2-pct').textContent = phase2Pct + '%';
+      document.getElementById('summary-phase-3-pct').textContent = phase3Pct + '%';
+
+      console.log('Phase Percentages:', {
+        phase1: phase1Pct + '%',
+        phase2: phase2Pct + '%',
+        phase3: phase3Pct + '%',
+        total: '100%'
+      });
+    }
+
+    // Calculate percentages on page load
+    window.addEventListener('DOMContentLoaded', function() {
+      calculatePhasePercentages();
+    });
+
+    // Re-calculate when currency changes
+    document.addEventListener('currencyChanged', function() {
+      calculatePhasePercentages();
+    });
+  </script>
 </body>
 </html>
