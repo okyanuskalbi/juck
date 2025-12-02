@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Health Talia Health System</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-logo">
+          <div class="sidebar-logo-icon" data-clinic-logo>🏥</div>
+          <div class="sidebar-logo-text">
+            <span class="sidebar-logo-title" data-clinic-name>Your Clinic</span>
+            <span class="sidebar-logo-subtitle" data-clinic-subtitle>Healthcare System</span>
+          </div>
+        </a>
+        <button class="sidebar-toggle" onclick="toggleSidebar()"><span>☰</span></button>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <ul class="nav-list">
+            <li class="nav-item"><a href="dashboard.html" class="nav-link"><span class="nav-icon">📊</span><span class="nav-text">Dashboard</span></a></li>
+            <li class="nav-item"><a href="settings.html" class="nav-link"><span class="nav-icon">⚙️</span><span class="nav-text">Settings</span></a></li>
+            <li class="nav-item"><a href="admin.html" class="nav-link active"><span class="nav-icon">🔐</span><span class="nav-text">Admin Panel</span></a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <div class="main-content">
+      <header class="header">
+        <div class="header-left">
+          <h1 class="header-title">Admin Panel</h1>
+        </div>
+        <div class="header-right">
+          <button class="btn btn-primary" onclick="openModal('add-user-modal')">
+            <span>➕</span><span>Add User</span>
+          </button>
+          <button class="header-icon-btn" onclick="toggleTheme()"><span id="theme-icon">🌙</span></button>
+        </div>
+      </header>
+
+      <div class="page-container">
+        <div class="tabs">
+          <ul class="tabs-list">
+            <button class="tabs-tab active" onclick="switchTab('user-management')">User Management</button>
+            <button class="tabs-tab" onclick="switchTab('roles-permissions')">Roles & Permissions</button>
+            <button class="tabs-tab" onclick="switchTab('smtp-settings')">SMTP Settings</button>
+            <button class="tabs-tab" onclick="switchTab('system-logs')">System Logs</button>
+          </ul>
+        </div>
+
+        <div class="tabs-content active" id="user-management">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">System Users</h3>
+            </div>
+            <div class="card-body" style="padding: 0;">
+              <div class="table-container" style="border: none;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>User</th>
+                      <th>Email</th>
+                      <th>Role</th>
+                      <th>Status</th>
+                      <th>Last Login</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div style="display: flex; align-items: center; gap: var(--space-3);">
+                          <div class="avatar">JD</div>
+                          <span class="font-medium">Dr. John Doe</span>
+                        </div>
+                      </td>
+                      <td>john.doe@healthtalia.com</td>
+                      <td><span class="badge badge-danger">Administrator</span></td>
+                      <td><span class="badge badge-success">Active</span></td>
+                      <td>2 hours ago</td>
+                      <td>
+                        <button class="btn btn-sm btn-ghost">✏️</button>
+                        <button class="btn btn-sm btn-ghost">🗑️</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div style="display: flex; align-items: center; gap: var(--space-3);">
+                          <div class="avatar">JS</div>
+                          <span class="font-medium">Dr. Jane Smith</span>
+                        </div>
+                      </td>
+                      <td>jane.smith@healthtalia.com</td>
+                      <td><span class="badge badge-primary">Dentist</span></td>
+                      <td><span class="badge badge-success">Active</span></td>
+                      <td>1 day ago</td>
+                      <td>
+                        <button class="btn btn-sm btn-ghost">✏️</button>
+                        <button class="btn btn-sm btn-ghost">🗑️</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div style="display: flex; align-items: center; gap: var(--space-3);">
+                          <div class="avatar">SA</div>
+                          <span class="font-medium">Sarah Anderson</span>
+                        </div>
+                      </td>
+                      <td>sarah.a@healthtalia.com</td>
+                      <td><span class="badge badge-warning">Receptionist</span></td>
+                      <td><span class="badge badge-success">Active</span></td>
+                      <td>3 hours ago</td>
+                      <td>
+                        <button class="btn btn-sm btn-ghost">✏️</button>
+                        <button class="btn btn-sm btn-ghost">🗑️</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabs-content" id="roles-permissions">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Role Permissions</h3>
+            </div>
+            <div class="card-body">
+              <div class="grid grid-cols-3 gap-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="font-semibold mb-4">Administrator</h4>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" checked disabled>
+                      <label class="form-check-label">Full System Access</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" checked disabled>
+                      <label class="form-check-label">User Management</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" checked disabled>
+                      <label class="form-check-label">Financial Reports</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="font-semibold mb-4">Dentist</h4>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" checked>
+                      <label class="form-check-label">View Patients</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" checked>
+                      <label class="form-check-label">Create Treatment Plans</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input">
+                      <label class="form-check-label">View Financial Data</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="font-semibold mb-4">Receptionist</h4>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" checked>
+                      <label class="form-check-label">Manage Appointments</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" checked>
+                      <label class="form-check-label">Add Patients</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input">
+                      <label class="form-check-label">Process Payments</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabs-content" id="smtp-settings">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Email Configuration</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label class="form-label required">SMTP Host</label>
+                <input type="text" class="form-input" placeholder="smtp.example.com">
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div class="form-group">
+                  <label class="form-label required">SMTP Port</label>
+                  <input type="number" class="form-input" placeholder="587">
+                </div>
+                <div class="form-group">
+                  <label class="form-label required">Encryption</label>
+                  <select class="form-select">
+                    <option>TLS</option>
+                    <option>SSL</option>
+                    <option>None</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label required">Username</label>
+                <input type="text" class="form-input" placeholder="noreply@healthtalia.com">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label required">Password</label>
+                <input type="password" class="form-input" placeholder="••••••••">
+              </div>
+
+              <button class="btn btn-primary">
+                <span>💾</span><span>Save SMTP Settings</span>
+              </button>
+              <button class="btn btn-outline">
+                <span>✉️</span><span>Send Test Email</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabs-content" id="system-logs">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Recent System Activity</h3>
+            </div>
+            <div class="card-body" style="padding: 0;">
+              <div class="table-container" style="border: none;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Timestamp</th>
+                      <th>User</th>
+                      <th>Action</th>
+                      <th>Details</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Dec 2, 2025 14:30</td>
+                      <td>Dr. John Doe</td>
+                      <td><span class="badge badge-success">Login</span></td>
+                      <td>Successful login from 192.168.1.1</td>
+                    </tr>
+                    <tr>
+                      <td>Dec 2, 2025 12:15</td>
+                      <td>Dr. Jane Smith</td>
+                      <td><span class="badge badge-primary">Create</span></td>
+                      <td>Created treatment plan #TP003</td>
+                    </tr>
+                    <tr>
+                      <td>Dec 2, 2025 10:45</td>
+                      <td>Sarah Anderson</td>
+                      <td><span class="badge badge-warning">Update</span></td>
+                      <td>Updated patient record #P024</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="add-user-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Add New User</h3>
+        <button class="modal-close" onclick="closeModal('add-user-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="form-group">
+              <label class="form-label required">First Name</label>
+              <input type="text" class="form-input" placeholder="Enter first name">
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Last Name</label>
+              <input type="text" class="form-input" placeholder="Enter last name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required">Email</label>
+            <input type="email" class="form-input" placeholder="user@healthtalia.com">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required">Role</label>
+            <select class="form-select">
+              <option>Administrator</option>
+              <option>Dentist</option>
+              <option>Receptionist</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required">Password</label>
+            <input type="password" class="form-input" placeholder="Enter password">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('add-user-modal')">Cancel</button>
+        <button class="btn btn-primary">
+          <span>💾</span><span>Create User</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/branding.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/translations.js"></script>
+</body>
+</html>

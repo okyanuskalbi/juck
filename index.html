@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Clinic Management System</title>
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <style>
+    /* Login Page Specific Styles */
+    .login-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: var(--space-4);
+    }
+
+    .login-card {
+      background-color: var(--color-background);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-xl);
+      width: 100%;
+      max-width: 450px;
+      overflow: hidden;
+    }
+
+    .login-header {
+      padding: var(--space-8);
+      text-align: center;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .login-logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto var(--space-4);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+      border-radius: var(--radius-xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 40px;
+      font-weight: var(--font-weight-bold);
+    }
+
+    .login-title {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .login-subtitle {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .login-body {
+      padding: var(--space-8);
+    }
+
+    .login-footer {
+      padding: var(--space-6);
+      background-color: var(--color-background-secondary);
+      text-align: center;
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .login-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-4);
+    }
+
+    .forgot-password {
+      font-size: var(--font-size-sm);
+      color: var(--color-primary);
+    }
+
+    .forgot-password:hover {
+      text-decoration: underline;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: var(--space-6) 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .divider span {
+      padding: 0 var(--space-3);
+      color: var(--color-text-tertiary);
+      font-size: var(--font-size-sm);
+    }
+
+    .theme-toggle-login {
+      position: absolute;
+      top: var(--space-4);
+      right: var(--space-4);
+    }
+  </style>
+</head>
+<body>
+  <button class="btn btn-icon btn-ghost theme-toggle-login" onclick="toggleTheme()">
+    <span id="theme-icon">🌙</span>
+  </button>
+
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-logo" data-clinic-logo>
+          <span>🏥</span>
+        </div>
+        <h1 class="login-title" data-clinic-name>Your Clinic</h1>
+        <p class="login-subtitle" data-clinic-subtitle>Healthcare Management System</p>
+      </div>
+
+      <div class="login-body">
+        <form id="loginForm" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label class="form-label required" data-lang="email-label">Email Address</label>
+            <div class="input-group">
+              <span class="input-group-icon">📧</span>
+              <input
+                type="email"
+                class="form-input"
+                id="email"
+                placeholder="admin@healthtalia.com"
+                data-lang-placeholder="email-placeholder"
+                required
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required" data-lang="password-label">Password</label>
+            <div class="input-group">
+              <span class="input-group-icon">🔒</span>
+              <input
+                type="password"
+                class="form-input"
+                id="password"
+                placeholder="Enter your password"
+                data-lang-placeholder="password-placeholder"
+                required
+              >
+            </div>
+          </div>
+
+          <div class="login-options">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="remember">
+              <label class="form-check-label" for="remember" data-lang="remember-me">Remember me</label>
+            </div>
+            <a href="#" class="forgot-password" data-lang="forgot-password">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg w-full">
+            <span data-lang="sign-in-btn">Sign In</span>
+            <span>→</span>
+          </button>
+        </form>
+
+        <div class="divider">
+          <span data-lang="or-text">or</span>
+        </div>
+
+        <div style="display: flex; gap: var(--space-3);">
+          <button class="btn btn-outline flex-1" onclick="setLanguage('en')">
+            🇬🇧 English
+          </button>
+          <button class="btn btn-outline flex-1" onclick="setLanguage('tr')">
+            🇹🇷 Türkçe
+          </button>
+        </div>
+      </div>
+
+      <div class="login-footer">
+        <p>&copy; 2025 <span data-clinic-name>Your Clinic</span>. <span data-lang="all-rights">All rights reserved</span>.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/branding.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/translations.js"></script>
+  <script>
+    function handleLogin(event) {
+      event.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      // Simple validation (in production, this would connect to a backend)
+      if (email && password) {
+        // Store login state
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userEmail', email);
+
+        // Redirect to dashboard
+        window.location.href = 'pages/dashboard.html';
+      }
+    }
+
+    // Check if already logged in
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      window.location.href = 'pages/dashboard.html';
+    }
+  </script>
+</body>
+</html>

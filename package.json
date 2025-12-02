@@ -1,0 +1,27 @@
+{
+  "name": "health-talia-appointment-system",
+  "version": "1.0.0",
+  "description": "Health Talia - Doctor Appointment & Clinic Management System",
+  "main": "index.html",
+  "scripts": {
+    "start": "echo 'Static HTML site - no build required'",
+    "build": "echo 'Static HTML site - no build required'",
+    "deploy": "echo 'Ready for deployment'"
+  },
+  "keywords": [
+    "healthcare",
+    "doctor-appointment",
+    "clinic-management",
+    "medical",
+    "patient-management"
+  ],
+  "author": "Health Talia",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/okyanuskalbi/juck"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

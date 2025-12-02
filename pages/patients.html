@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patients - Health Talia Health System</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar (Same as dashboard) -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-logo">
+          <div class="sidebar-logo-icon" data-clinic-logo>🏥</div>
+          <div class="sidebar-logo-text">
+            <span class="sidebar-logo-title" data-clinic-name>Your Clinic</span>
+            <span class="sidebar-logo-subtitle" data-clinic-subtitle>Healthcare System</span>
+          </div>
+        </a>
+        <button class="sidebar-toggle" onclick="toggleSidebar()">
+          <span>☰</span>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <h3 class="nav-section-title">Main</h3>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="dashboard.html" class="nav-link">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text" data-lang="dashboard">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="patients.html" class="nav-link active">
+                <span class="nav-icon">👥</span>
+                <span class="nav-text" data-lang="patients">Patients</span>
+                <span class="nav-badge badge badge-primary">24</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="treatment-planner.html" class="nav-link">
+                <span class="nav-icon">📋</span>
+                <span class="nav-text" data-lang="treatment-planner">Treatment Planner</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="treatment-history.html" class="nav-link">
+                <span class="nav-icon">📜</span>
+                <span class="nav-text" data-lang="treatment-history">Treatment History</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-section-title">Financial</h3>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="payments.html" class="nav-link">
+                <span class="nav-icon">💰</span>
+                <span class="nav-text" data-lang="payments">Payments</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="expenses.html" class="nav-link">
+                <span class="nav-icon">💸</span>
+                <span class="nav-text" data-lang="expenses">Expenses</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="reports.html" class="nav-link">
+                <span class="nav-icon">📈</span>
+                <span class="nav-text" data-lang="reports">Reports</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-section-title">System</h3>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="settings.html" class="nav-link">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-text" data-lang="settings">Settings</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="admin.html" class="nav-link">
+                <span class="nav-icon">🔐</span>
+                <span class="nav-text" data-lang="admin">Admin Panel</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="avatar">
+            <span>JD</span>
+          </div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Dr. John Doe</div>
+            <div class="sidebar-user-role">Administrator</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-left">
+          <button class="btn btn-icon btn-ghost" onclick="toggleMobileMenu()">
+            <span>☰</span>
+          </button>
+          <h1 class="header-title" data-lang="patient-management">Patient Management</h1>
+        </div>
+
+        <div class="header-right">
+          <div class="header-search">
+            <span class="header-search-icon">🔍</span>
+            <input type="text" id="patient-search" placeholder="Search patients..." onkeyup="searchPatients()">
+          </div>
+
+          <div class="header-actions">
+            <div class="dropdown" id="language-dropdown">
+              <button class="header-selector" onclick="toggleDropdown('language-dropdown')">
+                <span>🌐</span>
+                <span id="language-display">EN</span>
+              </button>
+              <div class="dropdown-menu">
+                <button class="dropdown-item" onclick="setLanguage('en')">🇬🇧 English</button>
+                <button class="dropdown-item" onclick="setLanguage('tr')">🇹🇷 Türkçe</button>
+              </div>
+            </div>
+
+            <div class="dropdown" id="currency-dropdown">
+              <button class="header-selector" onclick="toggleDropdown('currency-dropdown')">
+                <span>💱</span>
+                <span id="currency-display">GBP</span>
+              </button>
+              <div class="dropdown-menu">
+                <button class="dropdown-item" onclick="setCurrency('GBP')">£ GBP</button>
+                <button class="dropdown-item" onclick="setCurrency('EUR')">€ EUR</button>
+                <button class="dropdown-item" onclick="setCurrency('USD')">$ USD</button>
+              </div>
+            </div>
+
+            <button class="header-icon-btn" onclick="toggleTheme()">
+              <span id="theme-icon">🌙</span>
+            </button>
+
+            <button class="header-icon-btn">
+              <span>🔔</span>
+              <span class="badge">3</span>
+            </button>
+
+            <button class="header-icon-btn" onclick="logout()">
+              <span>🚪</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="page-container">
+        <div class="page-header">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div>
+              <h2 class="page-title" data-lang="patient-management">Patient Management</h2>
+              <p class="page-description">Manage your patient records and information</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-outline">
+                <span>📤</span>
+                <span data-lang="export">Export</span>
+              </button>
+              <button class="btn btn-primary" onclick="openModal('add-patient-modal')">
+                <span>➕</span>
+                <span data-lang="add-patient">Add Patient</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="card" style="margin-bottom: var(--space-6);">
+          <div class="card-body">
+            <div class="grid grid-cols-4 gap-4">
+              <div class="form-group" style="margin: 0;">
+                <label class="form-label">Status</label>
+                <select class="form-select">
+                  <option>All Statuses</option>
+                  <option>Active</option>
+                  <option>Inactive</option>
+                  <option>Archived</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin: 0;">
+                <label class="form-label">Date Range</label>
+                <select class="form-select">
+                  <option>All Time</option>
+                  <option>This Month</option>
+                  <option>Last 3 Months</option>
+                  <option>This Year</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin: 0;">
+                <label class="form-label">Treatment Status</label>
+                <select class="form-select">
+                  <option>All</option>
+                  <option>In Treatment</option>
+                  <option>Completed</option>
+                  <option>Pending</option>
+                </select>
+              </div>
+              <div style="display: flex; align-items: flex-end;">
+                <button class="btn btn-outline w-full">
+                  <span>🔄</span>
+                  <span>Reset Filters</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Patients Table -->
+        <div class="table-container">
+          <table class="table" id="patients-table">
+            <thead>
+              <tr>
+                <th class="sortable" onclick="sortTable('patients-table', 0)">
+                  <div style="display: flex; align-items: center; gap: var(--space-1);">
+                    <span>Patient Name</span>
+                    <span>⇅</span>
+                  </div>
+                </th>
+                <th>Contact</th>
+                <th>Age</th>
+                <th>Last Visit</th>
+                <th>Next Appointment</th>
+                <th>Treatment Status</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div style="display: flex; align-items: center; gap: var(--space-3);">
+                    <div class="avatar">SJ</div>
+                    <div>
+                      <div class="font-medium">Sarah Johnson</div>
+                      <div class="text-xs text-secondary">ID: #P001</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div>+44 20 7123 4567</div>
+                  <div class="text-xs text-secondary">sarah.j@email.com</div>
+                </td>
+                <td>32</td>
+                <td>Nov 28, 2025</td>
+                <td>Dec 15, 2025</td>
+                <td><span class="badge badge-success">Active Treatment</span></td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td>
+                  <div style="display: flex; gap: var(--space-2);">
+                    <button class="btn btn-sm btn-ghost" onclick="viewPatient(1)">👁️</button>
+                    <button class="btn btn-sm btn-ghost" onclick="editPatient(1)">✏️</button>
+                    <button class="btn btn-sm btn-ghost" onclick="deletePatient(1)">🗑️</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display: flex; align-items: center; gap: var(--space-3);">
+                    <div class="avatar">MC</div>
+                    <div>
+                      <div class="font-medium">Michael Chen</div>
+                      <div class="text-xs text-secondary">ID: #P002</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div>+44 20 7234 5678</div>
+                  <div class="text-xs text-secondary">m.chen@email.com</div>
+                </td>
+                <td>45</td>
+                <td>Dec 1, 2025</td>
+                <td>Dec 20, 2025</td>
+                <td><span class="badge badge-warning">Pending</span></td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td>
+                  <div style="display: flex; gap: var(--space-2);">
+                    <button class="btn btn-sm btn-ghost">👁️</button>
+                    <button class="btn btn-sm btn-ghost">✏️</button>
+                    <button class="btn btn-sm btn-ghost">🗑️</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display: flex; align-items: center; gap: var(--space-3);">
+                    <div class="avatar">EW</div>
+                    <div>
+                      <div class="font-medium">Emma Wilson</div>
+                      <div class="text-xs text-secondary">ID: #P003</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div>+44 20 7345 6789</div>
+                  <div class="text-xs text-secondary">emma.w@email.com</div>
+                </td>
+                <td>28</td>
+                <td>Nov 25, 2025</td>
+                <td>-</td>
+                <td><span class="badge badge-gray">Completed</span></td>
+                <td><span class="badge badge-success">Active</span></td>
+                <td>
+                  <div style="display: flex; gap: var(--space-2);">
+                    <button class="btn btn-sm btn-ghost">👁️</button>
+                    <button class="btn btn-sm btn-ghost">✏️</button>
+                    <button class="btn btn-sm btn-ghost">🗑️</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <button class="pagination-btn" disabled>←</button>
+          <button class="pagination-btn active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <button class="pagination-btn">→</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Patient Modal -->
+  <div class="modal-backdrop" id="add-patient-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" data-lang="add-patient">Add New Patient</h3>
+        <button class="modal-close" onclick="closeModal('add-patient-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="add-patient-form">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="form-group">
+              <label class="form-label required">First Name</label>
+              <input type="text" class="form-input" placeholder="Enter first name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Last Name</label>
+              <input type="text" class="form-input" placeholder="Enter last name" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required">Email</label>
+            <input type="email" class="form-input" placeholder="patient@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required">Phone</label>
+            <input type="tel" class="form-input" placeholder="+44 20 7123 4567" required>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="form-group">
+              <label class="form-label required">Date of Birth</label>
+              <input type="date" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Gender</label>
+              <select class="form-select">
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Address</label>
+            <textarea class="form-textarea" placeholder="Enter address"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Medical History Notes</label>
+            <textarea class="form-textarea" placeholder="Enter any relevant medical history"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('add-patient-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="savePatient()">
+          <span>💾</span>
+          <span>Save Patient</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/branding.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/translations.js"></script>
+  <script>
+    function searchPatients() {
+      const input = document.getElementById('patient-search');
+      const table = document.getElementById('patients-table');
+      const filter = input.value.toLowerCase();
+      const rows = table.querySelectorAll('tbody tr');
+
+      rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(filter) ? '' : 'none';
+      });
+    }
+
+    function viewPatient(id) {
+      showToast('Viewing patient #' + id, 'info');
+    }
+
+    function editPatient(id) {
+      showToast('Editing patient #' + id, 'info');
+    }
+
+    function deletePatient(id) {
+      if (confirm('Are you sure you want to delete this patient?')) {
+        showToast('Patient #' + id + ' deleted', 'success');
+      }
+    }
+
+    function savePatient() {
+      if (validateForm('add-patient-form')) {
+        showToast('Patient added successfully!', 'success');
+        closeModal('add-patient-modal');
+      }
+    }
+  </script>
+</body>
+</html>

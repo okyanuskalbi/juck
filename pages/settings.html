@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - Health Talia Health System</title>
+  <link rel="stylesheet" href="../css/design-system.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-logo">
+          <div class="sidebar-logo-icon" data-clinic-logo>🏥</div>
+          <div class="sidebar-logo-text">
+            <span class="sidebar-logo-title" data-clinic-name>Your Clinic</span>
+            <span class="sidebar-logo-subtitle" data-clinic-subtitle>Healthcare System</span>
+          </div>
+        </a>
+        <button class="sidebar-toggle" onclick="toggleSidebar()"><span>☰</span></button>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <ul class="nav-list">
+            <li class="nav-item"><a href="settings.html" class="nav-link active"><span class="nav-icon">⚙️</span><span class="nav-text">Settings</span></a></li>
+            <li class="nav-item"><a href="admin.html" class="nav-link"><span class="nav-icon">🔐</span><span class="nav-text">Admin</span></a></li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
+
+    <div class="main-content">
+      <header class="header">
+        <div class="header-left">
+          <h1 class="header-title">Settings</h1>
+        </div>
+        <div class="header-right">
+          <button class="header-icon-btn" onclick="toggleTheme()"><span id="theme-icon">🌙</span></button>
+        </div>
+      </header>
+
+      <div class="page-container">
+        <div class="tabs">
+          <ul class="tabs-list">
+            <button class="tabs-tab active" onclick="switchTab('clinic-info')">Clinic Information</button>
+            <button class="tabs-tab" onclick="switchTab('treatments-catalog')">Treatments Catalog</button>
+            <button class="tabs-tab" onclick="switchTab('pdf-settings')">PDF Settings</button>
+            <button class="tabs-tab" onclick="switchTab('preferences')">Preferences</button>
+          </ul>
+        </div>
+
+        <div class="tabs-content active" id="clinic-info">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Clinic Information</h3>
+            </div>
+            <div class="card-body">
+              <div class="alert alert-info">
+                <div class="alert-icon">ℹ️</div>
+                <div class="alert-content">
+                  <div class="alert-title">White-Label Branding</div>
+                  <div class="alert-message">Customize your clinic/company branding. These settings will appear throughout the system.</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Clinic/Company Logo (Emoji or Text)</label>
+                <div style="display: flex; align-items: center; gap: var(--space-4);">
+                  <div class="avatar avatar-lg" data-clinic-logo>🏥</div>
+                  <input type="text" id="clinicLogo" class="form-input" placeholder="🏥 or any emoji/text" style="max-width: 200px;">
+                  <span class="text-sm text-secondary">Enter an emoji (🏥 🦷 ⚕️ 💊) or short text</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label required">Clinic/Company Name</label>
+                <input type="text" id="clinicName" class="form-input" placeholder="Your Clinic Name">
+                <span class="form-help">This will appear in the header, login page, and all documents</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Subtitle/Tagline</label>
+                <input type="text" id="clinicSubtitle" class="form-input" placeholder="Healthcare Management System">
+                <span class="form-help">Optional tagline shown under your name</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Address</label>
+                <textarea id="clinicAddress" class="form-textarea" placeholder="Street address, City, Country"></textarea>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div class="form-group">
+                  <label class="form-label">Phone</label>
+                  <input type="tel" id="clinicPhone" class="form-input" placeholder="+1 234 567 8900">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email</label>
+                  <input type="email" id="clinicEmail" class="form-input" placeholder="info@yourclinic.com">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Website (optional)</label>
+                <input type="url" id="clinicWebsite" class="form-input" placeholder="https://yourclinic.com">
+              </div>
+
+              <div style="display: flex; gap: var(--space-3);">
+                <button class="btn btn-primary" onclick="saveBrandingSettings()">
+                  <span>💾</span><span>Save Branding</span>
+                </button>
+                <button class="btn btn-outline" onclick="loadBrandingSettings()">
+                  <span>🔄</span><span>Reload</span>
+                </button>
+                <button class="btn btn-danger" onclick="resetBrandingSettings()">
+                  <span>🗑️</span><span>Reset to Default</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabs-content" id="treatments-catalog">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Treatments & Pricing</h3>
+              <button class="btn btn-primary btn-sm">➕ Add Treatment</button>
+            </div>
+            <div class="card-body" style="padding: 0;">
+              <div class="table-container" style="border: none;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Treatment Name</th>
+                      <th>Duration</th>
+                      <th>Price (GBP)</th>
+                      <th>Price (EUR)</th>
+                      <th>Price (USD)</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Consultation</td>
+                      <td>30 min</td>
+                      <td>£50</td>
+                      <td>€58</td>
+                      <td>$62</td>
+                      <td><button class="btn btn-sm btn-ghost">✏️</button></td>
+                    </tr>
+                    <tr>
+                      <td>Teeth Cleaning</td>
+                      <td>45 min</td>
+                      <td>£120</td>
+                      <td>€140</td>
+                      <td>$150</td>
+                      <td><button class="btn btn-sm btn-ghost">✏️</button></td>
+                    </tr>
+                    <tr>
+                      <td>Teeth Whitening</td>
+                      <td>60 min</td>
+                      <td>£350</td>
+                      <td>€410</td>
+                      <td>$440</td>
+                      <td><button class="btn btn-sm btn-ghost">✏️</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabs-content" id="pdf-settings">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">PDF Export Settings</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label class="form-label">PDF Header Text</label>
+                <input type="text" class="form-input" value="Treatment Plan Quote">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Footer Text</label>
+                <input type="text" class="form-input" value="Thank you for choosing Health Talia">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Show/Hide Sections</label>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="show-logo" checked>
+                  <label class="form-check-label" for="show-logo">Show Clinic Logo</label>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="show-prices" checked>
+                  <label class="form-check-label" for="show-prices">Show Prices</label>
+                </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="show-terms" checked>
+                  <label class="form-check-label" for="show-terms">Show Terms & Conditions</label>
+                </div>
+              </div>
+
+              <button class="btn btn-primary">
+                <span>💾</span><span>Save PDF Settings</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabs-content" id="preferences">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">User Preferences</h3>
+            </div>
+            <div class="card-body">
+              <div class="grid grid-cols-2 gap-4">
+                <div class="form-group">
+                  <label class="form-label">Default Language</label>
+                  <select class="form-select">
+                    <option>English</option>
+                    <option>Türkçe</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Default Currency</label>
+                  <select class="form-select">
+                    <option>GBP (£)</option>
+                    <option>EUR (€)</option>
+                    <option>USD ($)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Theme</label>
+                <div class="form-check">
+                  <input type="radio" name="theme" class="form-check-input" checked>
+                  <label class="form-check-label">Light Mode</label>
+                </div>
+                <div class="form-check">
+                  <input type="radio" name="theme" class="form-check-input">
+                  <label class="form-check-label">Dark Mode</label>
+                </div>
+              </div>
+
+              <button class="btn btn-primary">
+                <span>💾</span><span>Save Preferences</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../js/branding.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/translations.js"></script>
+  <script>
+    // Load branding settings on page load
+    function loadBrandingSettings() {
+      const branding = window.brandingManager.getBranding();
+
+      document.getElementById('clinicLogo').value = branding.clinicLogo;
+      document.getElementById('clinicName').value = branding.clinicName;
+      document.getElementById('clinicSubtitle').value = branding.clinicSubtitle;
+      document.getElementById('clinicAddress').value = branding.clinicAddress;
+      document.getElementById('clinicPhone').value = branding.clinicPhone;
+      document.getElementById('clinicEmail').value = branding.clinicEmail;
+      document.getElementById('clinicWebsite').value = branding.clinicWebsite;
+    }
+
+    // Save branding settings
+    function saveBrandingSettings() {
+      const branding = {
+        clinicLogo: document.getElementById('clinicLogo').value || '🏥',
+        clinicName: document.getElementById('clinicName').value || 'Your Clinic',
+        clinicSubtitle: document.getElementById('clinicSubtitle').value || 'Healthcare Management System',
+        clinicAddress: document.getElementById('clinicAddress').value || '',
+        clinicPhone: document.getElementById('clinicPhone').value || '',
+        clinicEmail: document.getElementById('clinicEmail').value || '',
+        clinicWebsite: document.getElementById('clinicWebsite').value || ''
+      };
+
+      window.brandingManager.saveBranding(branding);
+      showToast('Branding settings saved successfully! Refresh page to see changes.', 'success');
+
+      // Refresh after 1 second
+      setTimeout(() => window.location.reload(), 1000);
+    }
+
+    // Reset branding to defaults
+    function resetBrandingSettings() {
+      if (confirm('Are you sure you want to reset to default branding? This cannot be undone.')) {
+        window.brandingManager.resetBranding();
+        loadBrandingSettings();
+        showToast('Branding reset to defaults', 'info');
+        setTimeout(() => window.location.reload(), 1000);
+      }
+    }
+
+    // Load settings when page loads
+    document.addEventListener('DOMContentLoaded', loadBrandingSettings);
+  </script>
+</body>
+</html>
