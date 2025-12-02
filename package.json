@@ -1,19 +1,24 @@
 {
   "name": "health-talia-appointment-system",
   "version": "1.0.0",
-  "description": "Health Talia - Doctor Appointment & Clinic Management System",
-  "main": "index.html",
+  "description": "Health Talia - Doctor Appointment & Clinic Management System (White-Label Healthcare CRM)",
+  "main": "server.js",
   "scripts": {
-    "start": "echo 'Static HTML site - no build required'",
+    "start": "node server.js",
+    "dev": "node server.js",
     "build": "echo 'Static HTML site - no build required'",
-    "deploy": "echo 'Ready for deployment'"
+    "deploy": "echo 'Ready for deployment'",
+    "test": "echo 'No tests specified'"
   },
   "keywords": [
     "healthcare",
     "doctor-appointment",
     "clinic-management",
     "medical",
-    "patient-management"
+    "patient-management",
+    "white-label",
+    "dental-crm",
+    "treatment-planner"
   ],
   "author": "Health Talia",
   "license": "MIT",
@@ -22,6 +27,14 @@
     "url": "https://github.com/okyanuskalbi/juck"
   },
   "engines": {
-    "node": ">=14.0.0"
-  }
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "compression": "^1.7.4",
+    "serve-static": "^1.15.0"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {}
 }
