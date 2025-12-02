@@ -1,6 +1,6 @@
 /* ============================================
-   Health Talia Dental CRM - Design System
-   Professional Medical SaaS UI Design
+   Health Talia - Doctor Appointment System
+   Modern Medical & Healthcare UI Design
    ============================================ */
 
 /* Import Inter font from Google Fonts */
@@ -11,16 +11,16 @@
    ============================================ */
 
 :root {
-  /* Primary Colors */
-  --color-primary: #2563EB;
-  --color-primary-hover: #1D4ED8;
-  --color-primary-light: #DBEAFE;
-  --color-primary-dark: #1E40AF;
+  /* Primary Colors - Modern Medical Cyan/Teal */
+  --color-primary: #06B6D4;
+  --color-primary-hover: #0891B2;
+  --color-primary-light: #CFFAFE;
+  --color-primary-dark: #0E7490;
 
-  /* Secondary Colors */
-  --color-secondary: #F59E0B;
-  --color-secondary-hover: #D97706;
-  --color-secondary-light: #FEF3C7;
+  /* Secondary Colors - Professional Indigo/Purple */
+  --color-secondary: #6366F1;
+  --color-secondary-hover: #4F46E5;
+  --color-secondary-light: #E0E7FF;
 
   /* Status Colors */
   --color-success: #10B981;
@@ -31,11 +31,16 @@
   --color-danger-hover: #DC2626;
   --color-danger-light: #FEE2E2;
 
-  --color-warning: #F59E0B;
-  --color-warning-light: #FEF3C7;
+  --color-warning: #F97316;
+  --color-warning-light: #FFEDD5;
 
-  --color-info: #3B82F6;
-  --color-info-light: #DBEAFE;
+  --color-info: #06B6D4;
+  --color-info-light: #CFFAFE;
+
+  /* Accent Colors - Teal for medical highlights */
+  --color-accent: #14B8A6;
+  --color-accent-hover: #0D9488;
+  --color-accent-light: #CCFBF1;
 
   /* Neutral Colors - Light Mode */
   --color-gray-50: #F9FAFB;

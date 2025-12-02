@@ -6,8 +6,8 @@
 const translations = {
   en: {
     // Login Page
-    'login-title': 'Health Talia Dental CRM',
-    'login-subtitle': 'Professional Dental Practice Management',
+    'login-title': 'Health Talia',
+    'login-subtitle': 'Doctor Appointment & Clinic Management',
     'email-label': 'Email Address',
     'email-placeholder': 'admin@healthtalia.com',
     'password-label': 'Password',
@@ -83,8 +83,8 @@ const translations = {
 
   tr: {
     // Login Page
-    'login-title': 'Health Talia Diş Hekimliği CRM',
-    'login-subtitle': 'Profesyonel Diş Kliniği Yönetim Sistemi',
+    'login-title': 'Health Talia',
+    'login-subtitle': 'Doktor Randevu ve Klinik Yönetim Sistemi',
     'email-label': 'E-posta Adresi',
     'email-placeholder': 'admin@healthtalia.com',
     'password-label': 'Şifre',

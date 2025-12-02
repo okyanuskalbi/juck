@@ -1,14 +1,14 @@
-# Health Talia Dental CRM & Treatment Planner
+# Health Talia - Doctor Appointment & Clinic Management System
 
-> Professional Medical SaaS UI Design - Complete Dental Clinic Management System
+> Modern Medical & Healthcare UI Design - Complete Doctor Appointment and Clinic Management System
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Status](https://img.shields.io/badge/status-production-success.svg)
 
-## 🦷 Overview
+## 🏥 Overview
 
-Health Talia Dental CRM is a comprehensive dental clinic management system featuring bilingual support (Turkish/English), multi-currency pricing (GBP/EUR/USD), and professional medical-grade styling. The application manages patient records, treatment planning with multi-visit support, payment tracking, expense management, and generates professional PDF treatment quotes.
+Health Talia is a comprehensive doctor appointment and clinic management system featuring bilingual support (Turkish/English), multi-currency pricing (GBP/EUR/USD), and modern medical-grade styling. The application manages patient records, appointment scheduling, treatment planning with multi-visit support, payment tracking, expense management, and generates professional PDF treatment quotes.
 
 ## ✨ Features
 
@@ -59,12 +59,14 @@ juck/
 
 ## 🎨 Design System
 
-### Color Palette
+### Color Palette (Modern Medical Theme)
 
 ```css
-Primary (Medical Blue):    #2563EB
-Secondary (Gold/Amber):    #F59E0B
+Primary (Medical Cyan):    #06B6D4
+Secondary (Indigo):        #6366F1
+Accent (Teal):             #14B8A6
 Success (Green):           #10B981
+Warning (Orange):          #F97316
 Danger (Red):              #EF4444
 Background (Light):        #F9FAFB
 ```
