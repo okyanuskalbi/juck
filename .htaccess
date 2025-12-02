@@ -1,19 +1,24 @@
-# Health Talia - Hostinger Configuration
+# Health Talia - Universal Configuration
+# Works on any domain, any subdirectory, any hosting
 
 # Enable rewrite engine
 <IfModule mod_rewrite.c>
     RewriteEngine On
+
+    # Automatic base path detection (works in subdirectories too)
+    # If installed in domain.com/subfolder/ it will work automatically
     RewriteBase /
 
-    # Force HTTPS (optional - uncomment if needed)
+    # Force HTTPS (optional - uncomment if you have SSL)
     # RewriteCond %{HTTPS} off
     # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
     # Redirect root to index.html
     DirectoryIndex index.html
 
-    # Handle 404 errors
-    ErrorDocument 404 /index.html
+    # Handle 404 errors - relative path
+    # Shows index.html on any 404 error (for SPA-like behavior)
+    ErrorDocument 404 index.html
 </IfModule>
 
 # Compression
