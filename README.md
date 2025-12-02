@@ -1,6 +1,14 @@
-# Health Talia - Doctor Appointment & Clinic Management System
+# Healthcare Management System - White-Label Edition
 
-> Modern Medical & Healthcare UI Design - Complete Doctor Appointment and Clinic Management System
+> Modern Medical & Healthcare UI Design - **Fully Customizable** for ANY Clinic or Hospital
+
+## 🏷️ WHITE-LABEL SYSTEM
+**This is NOT just for one clinic!** Any healthcare provider can use it with their own branding:
+- ✅ Customizable clinic/company name
+- ✅ Custom logo (emoji-based)
+- ✅ Contact information (phone, email, address)
+- ✅ Personalized taglines
+- ✅ **NO hardcoded company names**
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)

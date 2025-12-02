@@ -13,10 +13,10 @@
     <aside class="sidebar">
       <div class="sidebar-header">
         <a href="dashboard.html" class="sidebar-logo">
-          <div class="sidebar-logo-icon">🏥</div>
+          <div class="sidebar-logo-icon" data-clinic-logo>🏥</div>
           <div class="sidebar-logo-text">
-            <span class="sidebar-logo-title">Health Talia</span>
-            <span class="sidebar-logo-subtitle">Health System</span>
+            <span class="sidebar-logo-title" data-clinic-name>Your Clinic</span>
+            <span class="sidebar-logo-subtitle" data-clinic-subtitle>Healthcare System</span>
           </div>
         </a>
         <button class="sidebar-toggle" onclick="toggleSidebar()"><span>☰</span></button>
@@ -57,38 +57,67 @@
               <h3 class="card-title">Clinic Information</h3>
             </div>
             <div class="card-body">
-              <div class="form-group">
-                <label class="form-label">Clinic Logo</label>
-                <div style="display: flex; align-items: center; gap: var(--space-4);">
-                  <div class="avatar avatar-lg">🦷</div>
-                  <button class="btn btn-outline">Upload Logo</button>
+              <div class="alert alert-info">
+                <div class="alert-icon">ℹ️</div>
+                <div class="alert-content">
+                  <div class="alert-title">White-Label Branding</div>
+                  <div class="alert-message">Customize your clinic/company branding. These settings will appear throughout the system.</div>
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="form-label required">Clinic Name</label>
-                <input type="text" class="form-input" value="Health Talia Dental Clinic">
+                <label class="form-label">Clinic/Company Logo (Emoji or Text)</label>
+                <div style="display: flex; align-items: center; gap: var(--space-4);">
+                  <div class="avatar avatar-lg" data-clinic-logo>🏥</div>
+                  <input type="text" id="clinicLogo" class="form-input" placeholder="🏥 or any emoji/text" style="max-width: 200px;">
+                  <span class="text-sm text-secondary">Enter an emoji (🏥 🦷 ⚕️ 💊) or short text</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label required">Clinic/Company Name</label>
+                <input type="text" id="clinicName" class="form-input" placeholder="Your Clinic Name">
+                <span class="form-help">This will appear in the header, login page, and all documents</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Subtitle/Tagline</label>
+                <input type="text" id="clinicSubtitle" class="form-input" placeholder="Healthcare Management System">
+                <span class="form-help">Optional tagline shown under your name</span>
               </div>
 
               <div class="form-group">
                 <label class="form-label">Address</label>
-                <textarea class="form-textarea">123 Dental Street, London, UK</textarea>
+                <textarea id="clinicAddress" class="form-textarea" placeholder="Street address, City, Country"></textarea>
               </div>
 
               <div class="grid grid-cols-2 gap-4">
                 <div class="form-group">
                   <label class="form-label">Phone</label>
-                  <input type="tel" class="form-input" value="+44 20 7123 4567">
+                  <input type="tel" id="clinicPhone" class="form-input" placeholder="+1 234 567 8900">
                 </div>
                 <div class="form-group">
                   <label class="form-label">Email</label>
-                  <input type="email" class="form-input" value="info@healthtalia.com">
+                  <input type="email" id="clinicEmail" class="form-input" placeholder="info@yourclinic.com">
                 </div>
               </div>
 
-              <button class="btn btn-primary">
-                <span>💾</span><span>Save Changes</span>
-              </button>
+              <div class="form-group">
+                <label class="form-label">Website (optional)</label>
+                <input type="url" id="clinicWebsite" class="form-input" placeholder="https://yourclinic.com">
+              </div>
+
+              <div style="display: flex; gap: var(--space-3);">
+                <button class="btn btn-primary" onclick="saveBrandingSettings()">
+                  <span>💾</span><span>Save Branding</span>
+                </button>
+                <button class="btn btn-outline" onclick="loadBrandingSettings()">
+                  <span>🔄</span><span>Reload</span>
+                </button>
+                <button class="btn btn-danger" onclick="resetBrandingSettings()">
+                  <span>🗑️</span><span>Reset to Default</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -228,7 +257,54 @@
       </div>
     </div>
   </div>
+  <script src="../js/branding.js"></script>
   <script src="../js/app.js"></script>
   <script src="../js/translations.js"></script>
+  <script>
+    // Load branding settings on page load
+    function loadBrandingSettings() {
+      const branding = window.brandingManager.getBranding();
+
+      document.getElementById('clinicLogo').value = branding.clinicLogo;
+      document.getElementById('clinicName').value = branding.clinicName;
+      document.getElementById('clinicSubtitle').value = branding.clinicSubtitle;
+      document.getElementById('clinicAddress').value = branding.clinicAddress;
+      document.getElementById('clinicPhone').value = branding.clinicPhone;
+      document.getElementById('clinicEmail').value = branding.clinicEmail;
+      document.getElementById('clinicWebsite').value = branding.clinicWebsite;
+    }
+
+    // Save branding settings
+    function saveBrandingSettings() {
+      const branding = {
+        clinicLogo: document.getElementById('clinicLogo').value || '🏥',
+        clinicName: document.getElementById('clinicName').value || 'Your Clinic',
+        clinicSubtitle: document.getElementById('clinicSubtitle').value || 'Healthcare Management System',
+        clinicAddress: document.getElementById('clinicAddress').value || '',
+        clinicPhone: document.getElementById('clinicPhone').value || '',
+        clinicEmail: document.getElementById('clinicEmail').value || '',
+        clinicWebsite: document.getElementById('clinicWebsite').value || ''
+      };
+
+      window.brandingManager.saveBranding(branding);
+      showToast('Branding settings saved successfully! Refresh page to see changes.', 'success');
+
+      // Refresh after 1 second
+      setTimeout(() => window.location.reload(), 1000);
+    }
+
+    // Reset branding to defaults
+    function resetBrandingSettings() {
+      if (confirm('Are you sure you want to reset to default branding? This cannot be undone.')) {
+        window.brandingManager.resetBranding();
+        loadBrandingSettings();
+        showToast('Branding reset to defaults', 'info');
+        setTimeout(() => window.location.reload(), 1000);
+      }
+    }
+
+    // Load settings when page loads
+    document.addEventListener('DOMContentLoaded', loadBrandingSettings);
+  </script>
 </body>
 </html>
